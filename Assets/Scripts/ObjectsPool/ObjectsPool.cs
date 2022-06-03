@@ -16,7 +16,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
 
     protected virtual void OnEnable() => Validate();
 
-    protected virtual void Initialize(Transform container)
+    protected void Initialize(Transform container)
     {
         _pool = new List<TPoolObject>();
         _container = container;
@@ -31,6 +31,24 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
         return poolObject != null;
     }
 
+    protected virtual void Validate()
+    {
+        if (_templates == null)
+            throw new InvalidOperationException();
+
+        if (_templates.Length == 0)
+            throw new InvalidOperationException();
+
+        foreach (var template in _templates)
+        {
+            if (template == null)
+                throw new InvalidOperationException();
+
+            if (template.ClonesCount == 0)
+                throw new InvalidOperationException();
+        }
+    }
+
     private void Fill()
     {
         foreach (var template in _templates)
@@ -43,18 +61,5 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
         _createdClone = Instantiate(template, _container);
         _createdClone.Deactivate();
         _pool.Add(_createdClone);
-    }
-
-    private void Validate()
-    {
-        if (_templates == null)
-            throw new InvalidOperationException();
-
-        if (_templates.Length == 0)
-            throw new InvalidOperationException();
-
-        foreach (var template in _templates)
-            if (template == null)
-                throw new InvalidOperationException();
     }
 }
