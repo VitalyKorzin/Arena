@@ -16,7 +16,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
 
     protected virtual void OnEnable() => Validate();
 
-    protected virtual void Initialize(Transform container)
+    protected void Initialize(Transform container)
     {
         _pool = new List<TPoolObject>();
         _container = container;
