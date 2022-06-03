@@ -40,8 +40,13 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
             throw new InvalidOperationException();
 
         foreach (var template in _templates)
+        {
             if (template == null)
                 throw new InvalidOperationException();
+
+            if (template.ClonesCount == 0)
+                throw new InvalidOperationException();
+        }
     }
 
     private void Fill()
