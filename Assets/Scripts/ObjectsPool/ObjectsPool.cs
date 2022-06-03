@@ -45,7 +45,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
         _pool.Add(_createdClone);
     }
 
-    private void Validate()
+    protected virtual void Validate()
     {
         if (_templates == null)
             throw new InvalidOperationException();
