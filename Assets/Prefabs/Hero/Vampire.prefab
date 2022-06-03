@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6792849406522599520}
   - component: {fileID: 6792849406522599524}
   - component: {fileID: 6792849406522599525}
+  - component: {fileID: 763609443689670404}
   m_Layer: 0
   m_Name: Vampire
   m_TagString: Untagged
@@ -151,3 +152,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &763609443689670404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792849406522599521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a714fdfc2faa9044eb15cd0a4b3570dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 3
+  _maximumHealth: 5
