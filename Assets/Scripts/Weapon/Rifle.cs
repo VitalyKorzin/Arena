@@ -31,14 +31,14 @@ public class Rifle : Weapon
         if (_secondsBetweenShotOfBursts <= 0)
             throw new InvalidOperationException();
 
-        if (_bulletsCountInBurst == 0)
+        if (_bulletsCountInBurst == uint.MinValue)
             throw new InvalidOperationException();
     }
 
 
     private IEnumerator ShootBurst()
     {
-        _bulletsFiredCount = 0;
+        _bulletsFiredCount = uint.MinValue;
 
         while (_bulletsFiredCount < _bulletsCountInBurst && TryGetRandomObject(out Bullet bullet))
         {

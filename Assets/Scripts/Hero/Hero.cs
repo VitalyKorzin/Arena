@@ -7,18 +7,18 @@ using UnityEngine.Events;
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
-    [SerializeField] private int _maximumHealth;
+    [SerializeField] private uint _maximumHealth;
 
     private Animator _animator;
     private Health _health;
     private Weapon _weapon;
     private float _aimingAngle;
 
-    public bool IsAlive => _health.CurrentValue != 0;
-    public int MaximumHealth => _maximumHealth;
+    public bool IsAlive => _health.CurrentValue != uint.MinValue;
+    public uint MaximumHealth => _maximumHealth;
 
     public event UnityAction Died;
-    public event UnityAction<int> HealthChanged;
+    public event UnityAction<uint> HealthChanged;
 
     private void OnEnable() => Validate();
 
@@ -53,7 +53,7 @@ public class Hero : MonoBehaviour
         _animator.SetTrigger(HeroAnimator.Params.DamageReceived);
         NotifyOnHealtChanged();
 
-        if (_health.CurrentValue == 0)
+        if (_health.CurrentValue == uint.MinValue)
             Died?.Invoke();
     }
 
@@ -81,7 +81,7 @@ public class Hero : MonoBehaviour
         if (_movementSpeed <= 0)
             throw new InvalidOperationException();
 
-        if (_maximumHealth <= 0)
+        if (_maximumHealth == uint.MinValue)
             throw new InvalidOperationException();
     }
 }

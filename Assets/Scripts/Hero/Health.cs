@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class Health
 {
-    private readonly int _maximumValue;
+    private readonly uint _maximumValue;
 
-    public Health(int maximumValue)
+    public Health(uint maximumValue)
     {
-        if (maximumValue <= 0)
+        if (maximumValue == uint.MinValue)
             throw new InvalidOperationException();
 
         _maximumValue = maximumValue;
         CurrentValue = maximumValue;
     }
 
-    public int CurrentValue { get; private set; }
+    public uint CurrentValue { get; private set; }
 
     public void DecreaseByOne() 
-        => CurrentValue = Mathf.Clamp(--CurrentValue, 0, _maximumValue);
+        => CurrentValue = (uint)Mathf.Clamp(--CurrentValue, uint.MinValue, _maximumValue);
     
     public void IncreaseByOne()
-        => CurrentValue = Mathf.Clamp(++CurrentValue, 0, _maximumValue);
+        => CurrentValue = (uint)Mathf.Clamp(++CurrentValue, uint.MinValue, _maximumValue);
 }

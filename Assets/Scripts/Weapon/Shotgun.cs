@@ -8,7 +8,7 @@ public class Shotgun : Weapon
     [SerializeField] private float _scatterRange;
 
     private Quaternion _bulletRotation;
-    private int _bulletsFiredCount;
+    private uint _bulletsFiredCount;
     private float _rotationZ;
     private float _rotationW;
 
@@ -25,7 +25,7 @@ public class Shotgun : Weapon
     {
         base.Validate();
 
-        if (_bulletsCountInShot == 0)
+        if (_bulletsCountInShot == uint.MinValue)
             throw new InvalidOperationException();
 
         if (_scatterRange == 0)
@@ -34,7 +34,7 @@ public class Shotgun : Weapon
 
     private void ShootScatter()
     {
-        _bulletsFiredCount = 0;
+        _bulletsFiredCount = uint.MinValue;
 
         while (_bulletsFiredCount < _bulletsCountInShot && TryGetRandomObject(out Bullet bullet))
         {

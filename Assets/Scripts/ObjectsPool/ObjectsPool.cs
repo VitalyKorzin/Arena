@@ -12,7 +12,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
     private List<TPoolObject> _pool;
     private Transform _container;
     private TPoolObject _createdClone;
-    private int _randomIndex;
+    private uint _randomIndex;
 
     protected virtual void OnEnable() => Validate();
 
@@ -26,8 +26,8 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
     protected bool TryGetRandomObject(out TPoolObject poolObject)
     {
         _deactivatedObjects = _pool.Where(desiredObject => desiredObject.Deactivated);
-        _randomIndex = UnityEngine.Random.Range(0, _deactivatedObjects.Count());
-        poolObject = _deactivatedObjects.ElementAtOrDefault(_randomIndex);
+        _randomIndex = (uint)UnityEngine.Random.Range(uint.MinValue, _deactivatedObjects.Count());
+        poolObject = _deactivatedObjects.ElementAtOrDefault((int)_randomIndex);
         return poolObject != null;
     }
 
@@ -44,7 +44,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
             if (template == null)
                 throw new InvalidOperationException();
 
-            if (template.ClonesCount == 0)
+            if (template.ClonesCount == uint.MinValue)
                 throw new InvalidOperationException();
         }
     }
