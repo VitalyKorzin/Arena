@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9034756588837066317}
   - component: {fileID: 9034756588837066306}
   - component: {fileID: 9034756588837066318}
+  - component: {fileID: 1256051576210407738}
   - component: {fileID: -2928812239256231638}
   m_Layer: 0
   m_Name: Loafer
@@ -152,6 +153,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1256051576210407738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9034756588837066307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a4af8dad0d53742acec78ae426c840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-2928812239256231638
 MonoBehaviour:
   m_ObjectHideFlags: 0
