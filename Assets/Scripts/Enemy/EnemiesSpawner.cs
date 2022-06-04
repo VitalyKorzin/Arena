@@ -54,11 +54,11 @@ public class EnemiesSpawner : ObjectsPool<Enemy>
     private IEnumerator Spawn()
     {
         var delay = new WaitForSeconds(_secondsBetweenSpawn);
-        int randomIndex;
+        uint randomIndex;
 
         while (_hero.IsAlive && TryGetRandomObject(out Enemy enemy))
         {
-            randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Length - 1);
+            randomIndex = (uint)UnityEngine.Random.Range(uint.MinValue, _spawnPoints.Length - 1);
             enemy.transform.position = _spawnPoints[randomIndex].position;
             enemy.Activate();
             enemy.Initialize(_hero);

@@ -6,7 +6,7 @@ public class ObstaclesSeeker : MonoBehaviour
     [SerializeField] private ContactFilter2D _obstaclesFilter;
 
     private readonly RaycastHit2D[] _obstacles = new RaycastHit2D[1];
-    private int _obstaclesCount;
+    private uint _obstaclesCount;
     private Transform _target;
 
     private void OnEnable() => Validate();
@@ -16,9 +16,9 @@ public class ObstaclesSeeker : MonoBehaviour
 
     public bool ThereAreNoObstacles()
     {
-        _obstaclesCount = Physics2D.Raycast(transform.position, GetDirectionToTarget(), 
+        _obstaclesCount = (uint)Physics2D.Raycast(transform.position, GetDirectionToTarget(), 
             _obstaclesFilter, _obstacles, GetDistanceToTarget());
-        return _obstaclesCount == 0;
+        return _obstaclesCount == uint.MinValue;
     }
 
     private void Validate()

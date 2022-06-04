@@ -13,7 +13,7 @@ public class PathSeeker : MonoBehaviour
     private Path _path;
     private Seeker _seeker;
     private Transform _target;
-    private int _currentWaypointIndex;
+    private uint _currentWaypointIndex;
     private Coroutine _updatingPathJob;
     private WaitForSeconds _delayBetweenPathUpdate;
 
@@ -61,7 +61,7 @@ public class PathSeeker : MonoBehaviour
         if (path.error == false)
         {
             _path = path;
-            _currentWaypointIndex = 0;
+            _currentWaypointIndex = uint.MinValue;
             TargetPositionChanged?.Invoke(GetCurrentWaypoint());
         }
     }
@@ -70,7 +70,7 @@ public class PathSeeker : MonoBehaviour
     {
         if (GetDistanceToCurrentWaypoint() < _distanseBetweenWaypoints)
         {
-            _currentWaypointIndex = Mathf.Clamp(++_currentWaypointIndex, 0, _path.vectorPath.Count - 1);
+            _currentWaypointIndex = (uint)Mathf.Clamp(++_currentWaypointIndex, uint.MinValue, _path.vectorPath.Count - 1);
             TargetPositionChanged?.Invoke(GetCurrentWaypoint());
         }
     }
@@ -79,7 +79,7 @@ public class PathSeeker : MonoBehaviour
         => Vector2.Distance(transform.position, GetCurrentWaypoint());
 
     private Vector3 GetCurrentWaypoint()
-        => _path.vectorPath[_currentWaypointIndex];
+        => _path.vectorPath[(int)_currentWaypointIndex];
 
     private void Validate()
     {
