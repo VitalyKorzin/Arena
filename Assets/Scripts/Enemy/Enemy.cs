@@ -39,8 +39,8 @@ public class Enemy : PoolObject
 
     private IEnumerator Die()
     {
-        _stateMachine.Deactivate();
         _animator.SetBool(EnemyAnimator.Params.IsAlive, false);
+        _stateMachine.Deactivate();
         _collider.enabled = false;
         yield return _delayBeforeDeath;
         Died?.Invoke(this);

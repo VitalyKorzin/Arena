@@ -22,11 +22,7 @@ public class EnemyStateMachine : MonoBehaviour
         Transit(_firstState);
     }
 
-    public void Deactivate()
-    {
-        _currentState.Exit();
-        _currentState = null;
-    }
+    public void Deactivate() => _currentState.Exit();
 
     private void Transit(State nextState)
     {

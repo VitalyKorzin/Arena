@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clonesCount: 30
-  _secondsBeforeDeath: 0.3
+  _secondsBeforeDeath: 1
 --- !u!114 &1436191921483634722
 MonoBehaviour:
   m_ObjectHideFlags: 0
