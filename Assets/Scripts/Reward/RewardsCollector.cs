@@ -7,7 +7,7 @@ public class RewardsCollector : MonoBehaviour
     public uint Diamonds { get; private set; }
 
     public event UnityAction<uint> CoinsCountChanged;
-    public event UnityAction<float, uint> PickedUpDoubleScore;
+    public event UnityAction<float, uint> PickedUpScoreMultiplier;
     public event UnityAction<float> PickedUpMagnet;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +20,7 @@ public class RewardsCollector : MonoBehaviour
 
         if (collision.TryGetComponent(out ScoreMultiplier scoreMultiplier))
         {
-            PickedUpDoubleScore?.Invoke(scoreMultiplier.Duration, scoreMultiplier.Value);
+            PickedUpScoreMultiplier?.Invoke(scoreMultiplier.Duration, scoreMultiplier.Value);
             scoreMultiplier.Deactivate();
         }
     }
