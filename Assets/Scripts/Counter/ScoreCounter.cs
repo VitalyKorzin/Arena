@@ -27,7 +27,7 @@ public class ScoreCounter : MonoBehaviour
     private void OnDisable()
     {
         _heroSpawner.Spawned -= OnHeroSpawned;
-        _collector.PickedUpDoubleScore -= OnPickedUpDoubleScore;
+        _collector.PickedUpScoreMultiplier -= OnPickedUpScoreMultiplier;
     }
 
     private void Awake()
@@ -40,7 +40,7 @@ public class ScoreCounter : MonoBehaviour
         if (_hero.gameObject.TryGetComponent(out RewardsCollector collector))
         {
             _collector = collector;
-            _collector.PickedUpDoubleScore += OnPickedUpDoubleScore;
+            _collector.PickedUpScoreMultiplier += OnPickedUpScoreMultiplier;
         }
         else
         {
@@ -60,7 +60,7 @@ public class ScoreCounter : MonoBehaviour
         }
     }
 
-    private void OnPickedUpDoubleScore(float duration, uint scoreMultiplier)
+    private void OnPickedUpScoreMultiplier(float duration, uint scoreMultiplier)
     {
         if (duration <= 0)
             throw new InvalidOperationException();
