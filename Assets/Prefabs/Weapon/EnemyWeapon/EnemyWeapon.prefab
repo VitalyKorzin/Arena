@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _templates:
   - {fileID: 9030340259156440148, guid: 14719dc8dad97ed49a7d42b9771614d2, type: 3}
-  _secondsBetweenShots: 0.8
+  _secondsBetweenShots: 0.5
   ShotPoint: {fileID: 7236309531764493889}
 --- !u!1 &7236309531263032244
 GameObject:

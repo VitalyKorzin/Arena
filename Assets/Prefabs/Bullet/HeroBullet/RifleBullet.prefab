@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ad2135e5b91c1449f57a56f0868000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clonesCount: 50
-  _movementSpeed: 8
+  _clonesCount: 40
+  _movementSpeed: 12

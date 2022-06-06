@@ -22,6 +22,10 @@ public class Hero : MonoBehaviour
 
     private void OnEnable() => Validate();
 
+    // Test
+    //private void FixedUpdate()
+    //    => Move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+
     public void Initialize(Weapon weapon)
     {
         _weapon = weapon != null ? weapon : throw new InvalidOperationException();

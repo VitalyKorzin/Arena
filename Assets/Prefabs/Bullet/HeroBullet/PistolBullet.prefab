@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clonesCount: 20
-  _movementSpeed: 8
+  _movementSpeed: 12

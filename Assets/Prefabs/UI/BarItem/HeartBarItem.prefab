@@ -88,5 +88,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 7715115556342325610}
-  _fillingDurationDefault: 0.3
-  _emptyingDurationDefault: 0.3
+  _fillingDurationDefault: 0.1
+  _emptyingDurationDefault: 0.1

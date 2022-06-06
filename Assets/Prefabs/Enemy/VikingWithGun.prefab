@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d51030b4b0b5c04f8c08cdb60a69d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _speed: 3
 --- !u!114 &2794102094360059275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 9100941516314477545}
-  TransitionRange: 3
+  TransitionRange: 4
 --- !u!114 &9100941516314477545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,4 +337,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 9002519473107810028}
-  TransitionRange: 3.2
+  TransitionRange: 4.2
