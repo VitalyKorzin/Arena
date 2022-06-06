@@ -15,6 +15,10 @@ public abstract class Goods : ScriptableObject
 
     protected string PathToFile => $"\'Save\'{_fileName}.json";
 
+    public virtual void Save(GoodsSaver saver) { }
+
+    public virtual void Initialize(GoodsSaver saver) { }
+
     public bool CheckSolvency(Buyer buyer)
         => _payment.CheckSolvency(Price, buyer);
 

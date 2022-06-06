@@ -14,6 +14,26 @@ public class BoosterUpgrade : Goods
     public uint CurrentLevel => _currentLevel;
     public bool UpgradeCompleted => _currentLevel == _maximumLevel;
 
+    public override void Save(GoodsSaver saver)
+    {
+        var boosterUpgradeData = new BoosterUpgradeData
+        {
+            CurrentLevel = CurrentLevel,
+            Duration = _duration,
+            Price = Price
+        };
+        saver.SaveBooster(boosterUpgradeData, PathToFile);
+    }
+
+    public override void Initialize(GoodsSaver saver)
+    {
+        var boosterUpgradeData = saver.LoadBoosterUpgrade(PathToFile);
+        _duration = boosterUpgradeData.Duration;
+        Price = boosterUpgradeData.Price;
+        _currentLevel = boosterUpgradeData.CurrentLevel;
+        _booster.Initialize(_duration);
+    }
+
     public override void Buy(Buyer buyer)
     {
         base.Buy(buyer);
@@ -26,4 +46,12 @@ public class BoosterUpgrade : Goods
             _booster.Initialize(_duration);
         }
     }
+}
+
+[System.Serializable]
+public class BoosterUpgradeData
+{
+    public float Duration;
+    public uint CurrentLevel;
+    public uint Price;
 }
