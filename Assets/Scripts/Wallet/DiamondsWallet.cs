@@ -3,9 +3,15 @@ using UnityEngine.Events;
 
 public class DiamondsWallet : Wallet
 {
+    public override void OnSceneLoaded(PlayerResult argument)
+    {
+        Balance = LoadBalance();
+        Replenish(argument.DiamondsCount);
+    }
+
     protected override void Awake()
     {
-        Balance = (uint)Saver.LoadDiamondsCount();
+        Balance = LoadBalance();
         base.Awake();
     }
 
@@ -14,4 +20,7 @@ public class DiamondsWallet : Wallet
         base.ChangeBalance(value, monetaryTransaction);
         Saver.SaveDiamondsCount((int)Balance);
     }
+
+    private uint LoadBalance()
+        => (uint)Saver.LoadDiamondsCount();
 }

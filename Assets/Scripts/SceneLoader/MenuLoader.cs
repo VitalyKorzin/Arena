@@ -11,7 +11,7 @@ public class MenuLoader : MonoBehaviour
             DiamondsCount = diamondsCount,
             Score = score
         };
-        Menu.Load();
+        Menu.Load(playerResult);
     }
 }
 

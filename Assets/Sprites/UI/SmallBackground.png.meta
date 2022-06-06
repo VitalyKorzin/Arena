@@ -165,10 +165,10 @@ TextureImporter:
       name: SmallBackground_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 32
-        width: 803
-        height: 386
+        x: 24
+        y: 23
+        width: 816
+        height: 402
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

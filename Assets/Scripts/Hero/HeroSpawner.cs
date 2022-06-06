@@ -1,35 +1,32 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using IJunior.TypedScenes;
 
-public class HeroSpawner : MonoBehaviour
+public class HeroSpawner : MonoBehaviour, ISceneLoadHandler<PlayerConfiguration>
 {
-    [SerializeField] private Hero hero;
-    [SerializeField] private Weapon weapon;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _bulletsContainer;
+
+    private Hero _hero;
+    private Weapon _weapon;
 
     public event UnityAction<Hero> Spawned;
 
     private void OnEnable() => Validate();
 
-    private void Start()
+    private void Start() => Spawned?.Invoke(_hero);
+
+    public void OnSceneLoaded(PlayerConfiguration argument)
     {
-        hero = Instantiate(hero, _spawnPoint.position, Quaternion.identity);
-        weapon = Instantiate(weapon, hero.transform);
-        weapon.Initialize(_bulletsContainer);
-        hero.Initialize(weapon);
-        Spawned?.Invoke(hero);
+        _hero = Instantiate(argument.HeroSkin.Hero, _spawnPoint);
+        _weapon = Instantiate(argument.WeaponSkin.Weapon, _hero.transform);
+        _weapon.Initialize(_bulletsContainer);
+        _hero.Initialize(_weapon);
     }
 
     private void Validate()
     {
-        if (hero == null)
-            throw new InvalidOperationException();
-
-        if (weapon == null)
-            throw new InvalidOperationException();
-
         if (_spawnPoint == null)
             throw new InvalidOperationException();
 

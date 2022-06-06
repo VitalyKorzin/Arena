@@ -14,7 +14,7 @@ public class ArenaLoader : MonoBehaviour
             HeroSkin = _heroSkin,
             WeaponSkin = _weaponSkin
         };
-        Arena.Load();
+        Arena.Load(playerConfig);
     }
 
     public void SetHeroSkin(HeroSkin heroSkin) 
