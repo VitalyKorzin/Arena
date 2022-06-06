@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff171ace59efccd4aa2b5d29ca2fa239, type: 3}
   m_Name: CoinsPayment
   m_EditorClassIdentifier: 
-  _iconCurrency: {fileID: 0}
+  _iconCurrency: {fileID: 21300000, guid: c195e458cd6de3b4ca7e05f2b6867fee, type: 3}

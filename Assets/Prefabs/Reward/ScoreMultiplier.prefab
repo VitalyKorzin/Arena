@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clonesCount: 10
+  _duration: 5

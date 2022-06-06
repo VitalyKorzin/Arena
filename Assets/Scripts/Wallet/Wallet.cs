@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using IJunior.TypedScenes;
 
-public abstract class Wallet : MonoBehaviour
+public abstract class Wallet : MonoBehaviour, ISceneLoadHandler<PlayerResult>
 {
     [SerializeField] protected WalletSaver Saver;
 
@@ -22,6 +23,8 @@ public abstract class Wallet : MonoBehaviour
         => ChangeBalance(value, IncreaseBalance);
 
     public bool CheckSolvency(uint price) => Balance >= price;
+
+    public abstract void OnSceneLoaded(PlayerResult argument);
 
     protected virtual void ChangeBalance(uint value, UnityAction<uint> monetaryTransaction)
     {

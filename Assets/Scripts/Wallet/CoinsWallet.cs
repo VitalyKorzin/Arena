@@ -3,9 +3,15 @@ using UnityEngine.Events;
 
 public class CoinsWallet : Wallet
 {
+    public override void OnSceneLoaded(PlayerResult argument)
+    {
+        Balance = LoadBalance();
+        Replenish(argument.CoinsCount);
+    }
+
     protected override void Awake()
     {
-        Balance = (uint)Saver.LoadCoinsCount();
+        Balance = LoadBalance();
         base.Awake();
     }
 
@@ -14,4 +20,7 @@ public class CoinsWallet : Wallet
         base.ChangeBalance(value, monetaryTransaction);
         Saver.SaveCoinsCount((int)Balance);
     }
+
+    private uint LoadBalance() 
+        => (uint)Saver.LoadCoinsCount();
 }
