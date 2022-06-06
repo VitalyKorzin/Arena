@@ -13,7 +13,7 @@ public abstract class Goods : ScriptableObject
     public Sprite IconCurrency => _payment.IconCurrency;
     public uint Price { get { return _price; } protected set { _price = value; } }
 
-    protected string PathToFile => $"\'Save\'{_fileName}.json";
+    protected string PathToFile => $"{_fileName}.json";
 
     public virtual void Save(GoodsSaver saver) { }
 

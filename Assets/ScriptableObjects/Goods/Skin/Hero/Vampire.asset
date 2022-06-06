@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb4bc9cb9280f54e9343a43d8dcbb7f, type: 3}
+  m_Name: Vampire
+  m_EditorClassIdentifier: 
+  _fileName: Vampire
+  _payment: {fileID: 11400000, guid: 41665122752d99f40a717f86f8ce439c, type: 2}
+  _icon: {fileID: -8873460142350583148, guid: b769e256f188d7543be2fb0dcf413e03, type: 3}
+  _label: Vampire
+  _price: 200
+  _isBought: 0
+  _isSelected: 0
+  _hero: {fileID: 763609443689670404, guid: f868c5a850bf22847a421b10801a01a8, type: 3}
