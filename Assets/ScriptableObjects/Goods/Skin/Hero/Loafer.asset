@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb4bc9cb9280f54e9343a43d8dcbb7f, type: 3}
+  m_Name: Loafer
+  m_EditorClassIdentifier: 
+  _fileName: Loafer
+  _payment: {fileID: 11400000, guid: 41665122752d99f40a717f86f8ce439c, type: 2}
+  _icon: {fileID: 5413279289787620243, guid: b769e256f188d7543be2fb0dcf413e03, type: 3}
+  _label: Loafer
+  _price: 0
+  _isBought: 1
+  _isSelected: 1
+  _hero: {fileID: -2928812239256231638, guid: 4be0d4fd74f1a03498be2e98413c0cf6, type: 3}
