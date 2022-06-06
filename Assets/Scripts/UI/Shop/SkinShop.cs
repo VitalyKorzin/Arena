@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public abstract class SkinShop<TSkin, TSkinShopItem> : Shop<TSkin, TSkinShopItem
     where TSkin : Skin
     where TSkinShopItem : SkinShopItem<TSkin>
 {
+    [SerializeField] protected ArenaLoader ArenaLoader;
+
     private readonly List<TSkinShopItem> _shopItems = new List<TSkinShopItem>();
     private TSkin _selectedSkin;
 
@@ -66,5 +69,13 @@ public abstract class SkinShop<TSkin, TSkinShopItem> : Shop<TSkin, TSkinShopItem
             skin.Save(Saver);
             OnSelectButtonClick(skin);
         }
+    }
+
+    protected override void Validate()
+    {
+        base.Validate();
+
+        if (ArenaLoader == null)
+            throw new InvalidOperationException();
     }
 }
