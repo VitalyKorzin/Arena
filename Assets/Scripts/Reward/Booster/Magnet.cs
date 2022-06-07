@@ -16,20 +16,16 @@ public class Magnet : Booster
     public float AttractionForce => _attractionForce;
     public bool IsActive { get; private set; }
 
-    private void OnEnable() => Validate();
-
     private void OnDisable()
     {
         if (_attractionJob != null)
             StopCoroutine(_attractionJob);
-
-        IsActive = false;
-        _collider.radius = _defaultRadius;
     }
 
 
     private void Awake()
     {
+        Validate();
         _collider = GetComponent<CircleCollider2D>();
         _defaultRadius = _collider.radius;
         _defaultParent = transform.parent;
@@ -44,11 +40,22 @@ public class Magnet : Booster
 
     private IEnumerator AttractCoins()
     {
+        Activate();
+        yield return new WaitForSeconds(Duration);
+        Deactivate();
+    }
+
+    private new void Activate()
+    {
         IsActive = true;
         _collider.radius = _attractionRadius;
-        yield return new WaitForSeconds(Duration);
+    }
+
+    private new void Deactivate()
+    {
         transform.parent = _defaultParent;
-        Deactivate();
+        _collider.radius = _defaultRadius;
+        base.Deactivate();
     }
 
     private void Validate()

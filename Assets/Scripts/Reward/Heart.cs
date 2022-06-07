@@ -5,9 +5,12 @@ public class Heart : Reward
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Hero hero))
-        {
-            hero.Heal();
-            Deactivate();
-        }
+            ReactToHero(hero);
+    }
+
+    private void ReactToHero(Hero hero)
+    {
+        hero.Heal();
+        Deactivate();
     }
 }

@@ -42,10 +42,10 @@ public class HealthBar : Bar
             DisplayHearts((uint)_hearts.Count - currentValue, DestroyHeart);
     }
 
-    private void DisplayHearts(uint count, UnityAction action)
+    private void DisplayHearts(uint count, UnityAction display)
     {
         for (var i = 0; i < count; i++)
-            action?.Invoke();
+            display?.Invoke();
     }
 
     private void CreateHeart()

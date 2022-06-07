@@ -7,9 +7,8 @@ public class ShootingState : State
     private Coroutine _shootingJob;
     private float _aimingAngle;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         _shootingJob = StartCoroutine(_shooter.Shoot());
         Animator.SetBool(EnemyAnimator.Params.IsShooting, true);
     }

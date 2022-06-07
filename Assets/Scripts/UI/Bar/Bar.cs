@@ -11,6 +11,8 @@ public abstract class Bar : MonoBehaviour
     protected virtual void OnDisable() 
         => _heroSpawner.Spawned -= OnHeroSpawned;
 
+    private void Awake() => Validate();
+
     protected virtual void OnHeroSpawned(Hero hero)
     {
         if (hero == null)

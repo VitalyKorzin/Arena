@@ -7,14 +7,13 @@ public class ScoreDisplay : MonoBehaviour
     [SerializeField] private ScoreCounter _scoreCounter;
     [SerializeField] private TMP_Text _valueDisplay;
 
-    private void OnEnable()
-    {
-        Validate();
-        _scoreCounter.ValueChanged += OnScoreChanged;
-    }
+    private void OnEnable() 
+        => _scoreCounter.ValueChanged += OnScoreChanged;
 
     private void OnDisable() 
         => _scoreCounter.ValueChanged -= OnScoreChanged;
+
+    private void Awake() => Validate();
 
     private void OnScoreChanged(uint score)
         => _valueDisplay.text = score.ToString();

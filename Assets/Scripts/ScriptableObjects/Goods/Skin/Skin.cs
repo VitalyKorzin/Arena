@@ -19,12 +19,12 @@ public abstract class Skin : Goods
             IsBought = _isBought,
             IsSelect = _isSelected
         };
-        saver.SaveSkin(skinData, PathToFile);
+        saver.SaveSkin(skinData, FileName);
     }
 
     public override void Initialize(GoodsSaver saver)
     {
-        var skinData = saver.LoadSkin(PathToFile);
+        var skinData = saver.LoadSkin(FileName);
         _isBought = skinData.IsBought;
         _isSelected = skinData.IsSelect;
     }

@@ -17,7 +17,6 @@ public class GameOverWindow : Window
 
     private void OnEnable()
     {
-        Validate();
         _heroSpawner.Spawned += OnHeroSpawned;
         _menuLoadButton.onClick.AddListener(OnClickMenuLoadButton);
     }
@@ -27,6 +26,12 @@ public class GameOverWindow : Window
         _hero.Died -= OnHeroDied;
         _heroSpawner.Spawned -= OnHeroSpawned;
         _menuLoadButton.onClick.RemoveListener(OnClickMenuLoadButton);
+    }
+
+    protected override void Awake()
+    {
+        Validate();
+        base.Awake();
     }
 
     private void OnHeroSpawned(Hero hero)

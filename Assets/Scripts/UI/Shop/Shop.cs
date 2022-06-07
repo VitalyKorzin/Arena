@@ -12,10 +12,10 @@ public abstract class Shop<TGoods, TShopItem> : MonoBehaviour
     [SerializeField] protected Buyer Buyer;
     [SerializeField] protected GoodsSaver Saver;
 
-    protected virtual void OnEnable() => Validate();
-
     private void Awake()
     {
+        Validate();
+
         for (var i = 0; i < _goods.Length; i++)
             CreateShopItem(_goods[i]);
     }

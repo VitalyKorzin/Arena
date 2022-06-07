@@ -5,9 +5,8 @@ public class MovementState : State
 {
     private Mover _mover;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         _mover.Initialize(Target.transform);
         Animator.SetBool(EnemyAnimator.Params.IsRunning, true);
     }

@@ -8,11 +8,13 @@ public abstract class Transition : MonoBehaviour
     protected Hero Target { get; private set; }
     protected float DistanceToTarget
         => Vector2.Distance(transform.position, Target.transform.position);
+    protected Vector2 DirectionToTarget 
+        => (Target.transform.position - transform.position).normalized;
 
     public State TargetState => _targetState;
     public bool NeedTransit { get; protected set; }
 
-    private void OnEnable() => Validate();
+    protected virtual void Awake() => Validate();
 
     private void Update()
     {

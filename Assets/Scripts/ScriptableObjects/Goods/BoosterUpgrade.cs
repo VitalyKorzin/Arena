@@ -8,8 +8,8 @@ public class BoosterUpgrade : Goods
     [SerializeField] private uint _durationMultiplier;
     [SerializeField] private uint _priceMultiplier;
 
-    private uint _currentLevel = 1;
-    private float _duration = 10;
+    private uint _currentLevel;
+    private float _duration;
 
     public uint CurrentLevel => _currentLevel;
     public bool UpgradeCompleted => _currentLevel == _maximumLevel;
@@ -22,12 +22,12 @@ public class BoosterUpgrade : Goods
             Duration = _duration,
             Price = Price
         };
-        saver.SaveBooster(boosterUpgradeData, PathToFile);
+        saver.SaveBooster(boosterUpgradeData, FileName);
     }
 
     public override void Initialize(GoodsSaver saver)
     {
-        var boosterUpgradeData = saver.LoadBoosterUpgrade(PathToFile);
+        var boosterUpgradeData = saver.LoadBoosterUpgrade(FileName);
         _duration = boosterUpgradeData.Duration;
         Price = boosterUpgradeData.Price;
         _currentLevel = boosterUpgradeData.CurrentLevel;

@@ -8,30 +8,28 @@ public class CameraTracking : MonoBehaviour
 
     private Transform _target;
     private Vector3 _offset;
-    private Vector3 _targetPosition;
 
-    private void OnEnable()
-    {
-        Validate();
-        _heroSpawner.Spawned += OnHeroSpawned;
-    }
+    private void OnEnable() 
+        => _heroSpawner.Spawned += OnHeroSpawned;
 
-    private void OnDisable() => _heroSpawner.Spawned -= OnHeroSpawned;
+    private void OnDisable() 
+        => _heroSpawner.Spawned -= OnHeroSpawned;
 
-    private void FixedUpdate()
-    {
-        if (_target == null)
-            return;
+    private void Awake() => Validate();
 
-        _targetPosition = _target.position - _offset;
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, _movementSpeed * Time.fixedDeltaTime);
-    }
+    private void FixedUpdate() => FollowTarget();
 
     private void OnHeroSpawned(Hero hero)
     {
         _target = hero != null ? hero.transform : throw new InvalidOperationException();
         _offset = _target.position - transform.position;
     }
+
+    private void FollowTarget() 
+        => transform.position = Vector3.Lerp(transform.position, GetTargetPosition(),
+            _movementSpeed * Time.fixedDeltaTime);
+
+    private Vector3 GetTargetPosition() => _target.position - _offset;
 
     private void Validate()
     {

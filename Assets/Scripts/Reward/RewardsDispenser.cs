@@ -6,13 +6,17 @@ public class RewardsDispenser : ObjectsPool<Reward>
     [SerializeField] private Transform _rewardsContainer;
     [SerializeField] private EnemiesSpawner _enemiesSpawner;
 
-    protected override void OnEnable()
+    private void OnEnable()
         => _enemiesSpawner.Spawned += OnEnemySpawned;
 
     private void OnDisable()
         => _enemiesSpawner.Spawned -= OnEnemySpawned;
 
-    private void Awake() => Initialize(_rewardsContainer);
+    protected override void Awake()
+    {
+        base.Awake();
+        Initialize(_rewardsContainer);
+    }
 
     protected override void Validate()
     {

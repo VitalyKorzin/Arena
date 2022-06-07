@@ -9,11 +9,8 @@ public class CoinsCollectedCountDisplay : MonoBehaviour
 
     private RewardsCollector _collector;
 
-    private void OnEnable()
-    {
-        Validate();
-        _heroSpawner.Spawned += OnHeroSpawned;
-    }
+    private void OnEnable() 
+        => _heroSpawner.Spawned += OnHeroSpawned;
 
     private void OnDisable()
     {
@@ -21,20 +18,22 @@ public class CoinsCollectedCountDisplay : MonoBehaviour
         _collector.CoinsCountChanged -= OnCoinsCountChanged;
     }
 
+    private void Awake() => Validate();
+
     private void OnHeroSpawned(Hero hero)
     {
         if (hero == null)
             throw new InvalidOperationException();
 
+        _collector = GetRewardsCollector(hero);
+        _collector.CoinsCountChanged += OnCoinsCountChanged;
+    }
+
+    private RewardsCollector GetRewardsCollector(Hero hero)
+    {
         if (hero.gameObject.TryGetComponent(out RewardsCollector collector))
-        {
-            _collector = collector;
-            _collector.CoinsCountChanged += OnCoinsCountChanged;
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
+            return collector;
+        else throw new InvalidOperationException();
     }
 
     private void OnCoinsCountChanged(uint value)

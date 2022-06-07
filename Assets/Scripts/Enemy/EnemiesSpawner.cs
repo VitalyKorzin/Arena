@@ -11,18 +11,19 @@ public class EnemiesSpawner : ObjectsPool<Enemy>
     [SerializeField] private float _secondsBetweenSpawn;
 
     private Hero _hero;
+    private uint _randomIndex;
 
     public event UnityAction<Enemy> Spawned;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable(); 
-        _heroSpawner.Spawned += OnHeroSpawned;
-    }
+    private void OnEnable() => _heroSpawner.Spawned += OnHeroSpawned;
 
     private void OnDisable() => _heroSpawner.Spawned -= OnHeroSpawned;
 
-    private void Awake() => Initialize(_enemiesContainer);
+    protected override void Awake()
+    {
+        base.Awake();
+        Initialize(_enemiesContainer);
+    }
 
     protected override void Validate()
     {
@@ -54,16 +55,20 @@ public class EnemiesSpawner : ObjectsPool<Enemy>
     private IEnumerator Spawn()
     {
         var delay = new WaitForSeconds(_secondsBetweenSpawn);
-        uint randomIndex;
 
         while (_hero.IsAlive && TryGetRandomObject(out Enemy enemy))
         {
-            randomIndex = (uint)UnityEngine.Random.Range(uint.MinValue, _spawnPoints.Length - 1);
-            enemy.transform.position = _spawnPoints[randomIndex].position;
-            enemy.Activate();
-            enemy.Initialize(_hero);
+            InitializeEnemy(enemy);
             Spawned?.Invoke(enemy);
             yield return delay;
         }
+    }
+
+    private void InitializeEnemy(Enemy enemy)
+    {
+        _randomIndex = (uint)UnityEngine.Random.Range(uint.MinValue, _spawnPoints.Length - 1);
+        enemy.transform.position = _spawnPoints[_randomIndex].position;
+        enemy.Activate();
+        enemy.Initialize(_hero);
     }
 }

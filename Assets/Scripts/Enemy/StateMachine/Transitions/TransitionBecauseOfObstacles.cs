@@ -6,15 +6,12 @@ public abstract class TransitionBecauseOfObstacles : Transition
 {
     [SerializeField] protected float TransitionRange;
 
-    protected ObstaclesSeeker ObstaclesSeeker;
+    private ObstaclesSeeker _obstaclesSeeker;
 
-    private void Awake()
-        => ObstaclesSeeker = GetComponent<ObstaclesSeeker>();
-
-    public override void Initialize(Hero target)
+    protected override void Awake()
     {
-        base.Initialize(target);
-        ObstaclesSeeker.Initialize(target.transform);
+        base.Awake();
+        _obstaclesSeeker = GetComponent<ObstaclesSeeker>();
     }
 
     protected override void Validate()
@@ -24,4 +21,7 @@ public abstract class TransitionBecauseOfObstacles : Transition
         if (TransitionRange <= 0)
             throw new InvalidOperationException();
     }
+
+    protected bool ThereAreNoObstacles()
+        => _obstaclesSeeker.ThereAreNoObstacles(DirectionToTarget, DistanceToTarget);
 }

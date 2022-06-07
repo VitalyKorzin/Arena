@@ -13,12 +13,11 @@ public class HeroSpawner : MonoBehaviour, ISceneLoadHandler<PlayerConfiguration>
 
     public event UnityAction<Hero> Spawned;
 
-    private void OnEnable() => Validate();
-
     private void Start() => Spawned?.Invoke(_hero);
 
     public void OnSceneLoaded(PlayerConfiguration argument)
     {
+        Validate();
         _hero = Instantiate(argument.HeroSkin.Hero, _spawnPoint);
         _weapon = Instantiate(argument.WeaponSkin.Weapon, _hero.transform);
         _weapon.Initialize(_bulletsContainer);

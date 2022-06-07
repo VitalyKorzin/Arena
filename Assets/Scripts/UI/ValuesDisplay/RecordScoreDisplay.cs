@@ -8,10 +8,11 @@ public class RecordScoreDisplay : MonoBehaviour, ISceneLoadHandler<PlayerResult>
     [SerializeField] private RecordScoreSaver _saver;
     [SerializeField] private TMP_Text _valueDisplay;
 
-    private void OnEnable() => Validate();
-
     private void Awake()
-        => _valueDisplay.text = _saver.LoadRecordScore().ToString();
+    {
+        Validate();
+        _valueDisplay.text = _saver.LoadRecordScore().ToString();
+    }
 
     public void OnSceneLoaded(PlayerResult argument)
     {

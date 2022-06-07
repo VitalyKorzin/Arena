@@ -13,7 +13,7 @@ public abstract class ShopItem<TGoods> : MonoBehaviour
 
     public TGoods Goods { get; private set; }
 
-    protected virtual void OnEnable() => Validate();
+    protected virtual void Awake() => Validate();
 
     public void Initialize(TGoods goods)
         => Goods = goods ?? throw new InvalidOperationException();

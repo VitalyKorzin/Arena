@@ -7,7 +7,6 @@ public class Shotgun : Weapon
     [SerializeField] private uint _bulletsCountInShot;
     [SerializeField] private float _scatterRange;
 
-    private Quaternion _bulletRotation;
     private uint _bulletsFiredCount;
     private float _rotationZ;
     private float _rotationW;
@@ -38,12 +37,16 @@ public class Shotgun : Weapon
 
         while (_bulletsFiredCount < _bulletsCountInShot && TryGetRandomObject(out Bullet bullet))
         {
-            _rotationZ = ShotPoint.rotation.z + GetRandomRotation();
-            _rotationW = ShotPoint.rotation.w + GetRandomRotation();
-            _bulletRotation = new Quaternion(0f, 0f, _rotationZ, _rotationW);
-            ShootOnce(bullet, _bulletRotation);
+            ShootOnce(bullet, GetBulletRotation());
             _bulletsFiredCount++;
         }
+    }
+
+    private Quaternion GetBulletRotation()
+    {
+        _rotationZ = ShotPoint.rotation.z + GetRandomRotation();
+        _rotationW = ShotPoint.rotation.w + GetRandomRotation();
+        return new Quaternion(0f, 0f, _rotationZ, _rotationW);
     }
 
     private float GetRandomRotation() 

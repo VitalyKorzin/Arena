@@ -11,11 +11,8 @@ public class BoosterUpgradeShopItem : ShopItem<BoosterUpgrade>
 
     public event UnityAction<BoosterUpgrade, BoosterUpgradeShopItem> Upgraded;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        _upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
-    }
+    private void OnEnable() 
+        => _upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
 
     private void OnDisable() 
         => _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClick);

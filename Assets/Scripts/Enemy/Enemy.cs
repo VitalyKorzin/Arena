@@ -15,10 +15,9 @@ public class Enemy : PoolObject
 
     public event UnityAction<Enemy> Died;
 
-    private void OnEnable() => Validate();
-
     private void Awake()
     {
+        Validate();
         _delayBeforeDeath = new WaitForSeconds(_secondsBeforeDeath);
         _stateMachine = GetComponent<EnemyStateMachine>();
         _collider = GetComponent<BoxCollider2D>();

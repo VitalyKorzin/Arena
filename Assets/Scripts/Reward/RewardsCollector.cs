@@ -13,16 +13,10 @@ public class RewardsCollector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Magnet magnet))
-        {
-            PickedUpMagnet?.Invoke(magnet.Duration);
-            magnet.PickUp(transform);
-        }
+            PickUpMagnet(magnet);
 
         if (collision.TryGetComponent(out ScoreMultiplier scoreMultiplier))
-        {
-            PickedUpScoreMultiplier?.Invoke(scoreMultiplier.Duration, scoreMultiplier.Value);
-            scoreMultiplier.Deactivate();
-        }
+            PickUpScoreMultiplier(scoreMultiplier);
     }
 
     public void AddDiamond() => Diamonds++;
@@ -31,5 +25,17 @@ public class RewardsCollector : MonoBehaviour
     {
         Coins++;
         CoinsCountChanged?.Invoke(Coins);
+    }
+
+    private void PickUpMagnet(Magnet magnet)
+    {
+        PickedUpMagnet?.Invoke(magnet.Duration);
+        magnet.PickUp(transform);
+    }
+
+    private void PickUpScoreMultiplier(ScoreMultiplier scoreMultiplier)
+    {
+        PickedUpScoreMultiplier?.Invoke(scoreMultiplier.Duration, scoreMultiplier.Value);
+        scoreMultiplier.Deactivate();
     }
 }

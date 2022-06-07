@@ -8,14 +8,13 @@ public abstract class WalletDisplay<TWallet> : MonoBehaviour
     [SerializeField] private TWallet _wallet;
     [SerializeField] private TMP_Text _valueDisplay;
 
-    private void OnEnable()
-    {
-        Validate();
-        _wallet.BalanceChanged += OnBalanceChanged;
-    }
+    private void OnEnable() 
+        => _wallet.BalanceChanged += OnBalanceChanged;
 
     private void OnDisable() 
         => _wallet.BalanceChanged -= OnBalanceChanged;
+
+    private void Awake() => Validate();
 
     private void OnBalanceChanged(uint balance)
         => _valueDisplay.text = balance.ToString();

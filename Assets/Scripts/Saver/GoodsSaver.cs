@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class GoodsSaver : Saver
 {
-    public void SaveSkin(SkinData skin, string pathToFile)
-        => SaveObject(skin, pathToFile);
+    public void SaveSkin(SkinData skin, string fileName)
+        => SaveObject(skin, fileName);
 
-    public void SaveBooster(BoosterUpgradeData boosterUpgrade, string pathToFile)
-        => SaveObject(boosterUpgrade, pathToFile);
+    public void SaveBooster(BoosterUpgradeData boosterUpgrade, string fileName)
+        => SaveObject(boosterUpgrade, fileName);
 
-    public BoosterUpgradeData LoadBoosterUpgrade(string pathToFile)
-        => LoadObject<BoosterUpgradeData>(pathToFile);
+    public BoosterUpgradeData LoadBoosterUpgrade(string fileName)
+        => LoadObject<BoosterUpgradeData>(fileName);
 
-    public SkinData LoadSkin(string pathToFile)
-        => LoadObject<SkinData>(pathToFile);
+    public SkinData LoadSkin(string fileName)
+        => LoadObject<SkinData>(fileName);
 
-    private T LoadObject<T>(string pathToFile)
+    private T LoadObject<T>(string fileName)
     {
-        if (TryLoadObject(pathToFile, out T result))
+        if (TryLoadObject(fileName, out T result))
             return result;
         else
             throw new InvalidOperationException();

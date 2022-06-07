@@ -12,10 +12,8 @@ public abstract class SkinShop<TSkin, TSkinShopItem> : Shop<TSkin, TSkinShopItem
     private readonly List<TSkinShopItem> _shopItems = new List<TSkinShopItem>();
     private TSkin _selectedSkin;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
-
         for (var i = 0; i < _shopItems.Count; i++)
         {
             _shopItems[i].SelectButtonClick += OnSelectButtonClick;

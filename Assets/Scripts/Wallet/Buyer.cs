@@ -6,7 +6,7 @@ public class Buyer : MonoBehaviour
     [SerializeField] private CoinsWallet _coinsWallet;
     [SerializeField] private DiamondsWallet _diamondsWallet;
 
-    private void OnEnable() => Validate();
+    private void Awake() => Validate();
 
     public bool CheckSolvencyInCoins(uint price)
         => _coinsWallet.CheckSolvency(price);

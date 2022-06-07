@@ -13,17 +13,9 @@ public class BoostersBar : Bar
     protected override void OnHeroSpawned(Hero hero)
     {
         base.OnHeroSpawned(hero);
-
-        if (hero.gameObject.TryGetComponent(out RewardsCollector collector))
-        {
-            _collector = collector;
-            _collector.PickedUpScoreMultiplier += OnPickedUpScoreMultiplier;
-            _collector.PickedUpMagnet += OnPickedUpMagnet;
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
+        _collector = GetRewardsCollector(hero);
+        _collector.PickedUpScoreMultiplier += OnPickedUpScoreMultiplier;
+        _collector.PickedUpMagnet += OnPickedUpMagnet;
     }
 
     protected override void Validate()
@@ -35,6 +27,13 @@ public class BoostersBar : Bar
 
         if (_scoreMultiplierTemplate == null)
             throw new InvalidOperationException();
+    }
+
+    private RewardsCollector GetRewardsCollector(Hero hero)
+    {
+        if (hero.gameObject.TryGetComponent(out RewardsCollector collector))
+            return collector;
+        else throw new InvalidOperationException();
     }
 
     private void OnPickedUpScoreMultiplier(float duration, uint scoreMultiplier)

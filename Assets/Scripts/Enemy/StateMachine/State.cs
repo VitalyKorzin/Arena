@@ -12,10 +12,11 @@ public abstract class State : MonoBehaviour
     protected Vector2 DirectionToTarget
         => (Target.transform.position - transform.position).normalized;
 
-    protected virtual void OnEnable() => Validate();
-
-    protected virtual void Awake() 
-        => Animator = GetComponent<Animator>();
+    protected virtual void Awake()
+    {
+        Validate();
+        Animator = GetComponent<Animator>();
+    }
 
     public void Enter(Hero target)
     {
@@ -27,7 +28,7 @@ public abstract class State : MonoBehaviour
 
             foreach (var transition in _transitions)
             {
-                transition.Initialize(target);
+                transition.Initialize(Target);
                 transition.enabled = true;
             }
         }
@@ -35,7 +36,7 @@ public abstract class State : MonoBehaviour
 
     public void Exit()
     {
-        if (enabled == true)
+        if (enabled == true) 
         {
             foreach (var transition in _transitions)
                 transition.enabled = false;

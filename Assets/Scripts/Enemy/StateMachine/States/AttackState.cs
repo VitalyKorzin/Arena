@@ -9,9 +9,8 @@ public class AttackState : State
     private WaitForSeconds _delayBetweenAttack;
     private Coroutine _attackingJob;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         Animator.SetBool(EnemyAnimator.Params.IsAttacking, true);
         _attackingJob = StartCoroutine(Attack());
     }

@@ -12,9 +12,8 @@ public abstract class SkinShopItem<TSkin> : ShopItem<TSkin>
     public event UnityAction<TSkin> SellButtonClick;
     public event UnityAction<TSkin> SelectButtonClick;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         _sellButton.onClick.AddListener(OnSellButtonClick);
         _selectButton.onClick.AddListener(OnSelectButtonClick);
     }

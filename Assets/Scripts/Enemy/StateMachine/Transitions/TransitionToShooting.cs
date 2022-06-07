@@ -2,6 +2,6 @@
 
 public class TransitionToShooting : TransitionBecauseOfObstacles
 {
-    protected override bool CanTransit() 
-        => DistanceToTarget < TransitionRange && ObstaclesSeeker.ThereAreNoObstacles();
+    protected override bool CanTransit()
+        => DistanceToTarget < TransitionRange && ThereAreNoObstacles();
 }

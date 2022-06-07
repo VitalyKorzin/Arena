@@ -8,7 +8,7 @@ public class EnemyStateMachine : MonoBehaviour
     private Hero _target;
     private State _currentState;
 
-    private void OnEnable() => Validate();
+    private void Awake() => Validate();
 
     private void Update()
     {
@@ -29,7 +29,7 @@ public class EnemyStateMachine : MonoBehaviour
         if (_currentState != null)
             _currentState.Exit();
 
-        _currentState = nextState;
+        _currentState = nextState != null ? nextState : throw new InvalidOperationException();
         _currentState.Enter(_target);
     }
 

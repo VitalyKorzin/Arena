@@ -6,10 +6,9 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private Weapon _weapon;
 
-    private void OnEnable() => Validate();
-
     private void Awake()
     {
+        Validate();
         _weapon = Instantiate(_weapon, transform);
         _weapon.Initialize(null);
     }

@@ -17,14 +17,13 @@ public abstract class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler
     public Vector2 Direction { get; private set; }
     public bool IsUsing => Direction != Vector2.zero;
 
-    private void OnEnable()
-    {
-        Validate();
-        _heroSpawner.Spawned += OnHeroSpawned;
-    }
+    private void OnEnable() 
+        => _heroSpawner.Spawned += OnHeroSpawned;
 
     private void OnDisable() 
         => _heroSpawner.Spawned -= OnHeroSpawned;
+
+    private void Awake() => Validate();
 
     private void Start()
     {

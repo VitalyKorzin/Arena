@@ -16,7 +16,7 @@ public abstract class BarItem : MonoBehaviour
     private float _elapsedTime;
     private float _nextValue;
 
-    private void OnEnable() => Validate();
+    private void Awake() => Validate();
 
     public void Fill() => Fill(_fillingDurationDefault);
 

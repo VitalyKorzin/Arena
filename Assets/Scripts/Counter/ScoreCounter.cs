@@ -18,11 +18,7 @@ public class ScoreCounter : MonoBehaviour
 
     public event UnityAction<uint> ValueChanged;
 
-    private void OnEnable()
-    {
-        Validate();
-        _heroSpawner.Spawned += OnHeroSpawned;
-    }
+    private void OnEnable() => _heroSpawner.Spawned += OnHeroSpawned;
 
     private void OnDisable()
     {
@@ -31,23 +27,24 @@ public class ScoreCounter : MonoBehaviour
     }
 
     private void Awake()
-        => _delayBetweenIncrements = new WaitForSeconds(_secondsBetweenIncrements);
+    {
+        Validate();
+        _delayBetweenIncrements = new WaitForSeconds(_secondsBetweenIncrements);
+    }
 
     private void OnHeroSpawned(Hero hero)
     {
         _hero = hero != null ? hero : throw new InvalidOperationException();
+        _collector = GetRewardsCollector();
+        _collector.PickedUpScoreMultiplier += OnPickedUpScoreMultiplier;
+        StartIncreasingScoreJob(IncreaseScore());
+    }
 
+    private RewardsCollector GetRewardsCollector()
+    {
         if (_hero.gameObject.TryGetComponent(out RewardsCollector collector))
-        {
-            _collector = collector;
-            _collector.PickedUpScoreMultiplier += OnPickedUpScoreMultiplier;
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
-
-        _increasingScoreJob = StartCoroutine(IncreaseScore());
+            return collector;
+        else throw new InvalidOperationException();
     }
 
     private IEnumerator IncreaseScore()
@@ -55,26 +52,19 @@ public class ScoreCounter : MonoBehaviour
         while (_hero.IsAlive)
         {
             Value += _increasingValue;
-            ValueChanged?.Invoke(Value);
+            NotifyOnValueChanged();
             yield return _delayBetweenIncrements;
         }
     }
 
     private void OnPickedUpScoreMultiplier(float duration, uint scoreMultiplier)
     {
-        if (duration <= 0)
-            throw new InvalidOperationException();
-
-        if (scoreMultiplier == uint.MinValue)
-            throw new InvalidOperationException();
-
-        if (_increasingScoreJob != null)
-            StopCoroutine(_increasingScoreJob);
-
-        _increasingScoreJob = StartCoroutine(IncreaseDoubleScore(duration, scoreMultiplier));
+        Validate(duration, scoreMultiplier);
+        StopIncreasingScoreJob();
+        StartIncreasingScoreJob(IncreaseByMultipliedScore(duration, scoreMultiplier));
     }
 
-    private IEnumerator IncreaseDoubleScore(float duration, uint scoreMultiplier)
+    private IEnumerator IncreaseByMultipliedScore(float duration, uint scoreMultiplier)
     {
         float elapsedTime = 0;
 
@@ -82,11 +72,32 @@ public class ScoreCounter : MonoBehaviour
         {
             elapsedTime += _secondsBetweenIncrements;
             Value += _increasingValue * scoreMultiplier;
-            ValueChanged?.Invoke(Value);
+            NotifyOnValueChanged();
             yield return _delayBetweenIncrements;
         }
 
-        _increasingScoreJob = StartCoroutine(IncreaseScore());
+        StartIncreasingScoreJob(IncreaseScore());
+    }
+
+    private void StopIncreasingScoreJob()
+    {
+        if (_increasingScoreJob != null)
+            StopCoroutine(_increasingScoreJob);
+    }
+
+    private void StartIncreasingScoreJob(IEnumerator routine)
+        => _increasingScoreJob = StartCoroutine(routine);
+
+    private void NotifyOnValueChanged()
+        => ValueChanged?.Invoke(Value);
+
+    private void Validate(float duration, uint scoreMultiplier)
+    {
+        if (duration <= 0)
+            throw new InvalidOperationException();
+
+        if (scoreMultiplier == uint.MinValue)
+            throw new InvalidOperationException();
     }
 
     private void Validate()

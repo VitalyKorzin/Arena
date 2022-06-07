@@ -14,7 +14,7 @@ public abstract class ObjectsPool<TPoolObject> : MonoBehaviour
     private TPoolObject _createdClone;
     private uint _randomIndex;
 
-    protected virtual void OnEnable() => Validate();
+    protected virtual void Awake() => Validate();
 
     protected void Initialize(Transform container)
     {

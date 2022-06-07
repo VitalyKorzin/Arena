@@ -20,7 +20,7 @@ public class Hero : MonoBehaviour
     public event UnityAction Died;
     public event UnityAction<uint> HealthChanged;
 
-    private void OnEnable() => Validate();
+    private void Awake() => Validate();
 
     //Test
     private void FixedUpdate()
@@ -37,7 +37,7 @@ public class Hero : MonoBehaviour
 
     public void TakeAim(Vector2 direction)
     {
-        ValidateVector(direction);
+        Validate(direction);
         _aimingAngle = GetAngle(direction);
         _weapon.TakeAim(_aimingAngle);
         _animator.SetFloat(HeroAnimator.Params.AimingAngle, _aimingAngle);
@@ -46,7 +46,7 @@ public class Hero : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        ValidateVector(direction);
+        Validate(direction);
         transform.Translate(_movementSpeed * Time.deltaTime * direction);
         _animator.SetBool(HeroAnimator.Params.IsRunning, direction != Vector2.zero);
     }
@@ -74,9 +74,9 @@ public class Hero : MonoBehaviour
     private float GetAngle(Vector2 direction)
         => Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-    private void ValidateVector(Vector2 vector)
+    private void Validate(Vector2 direction)
     {
-        if (vector == null)
+        if (direction == null)
             throw new InvalidOperationException();
     }
 

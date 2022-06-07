@@ -19,8 +19,6 @@ public class PathSeeker : MonoBehaviour
 
     public event UnityAction<Vector3> TargetPositionChanged;
 
-    private void OnEnable() => Validate();
-
     private void OnDisable()
     {
         if (_updatingPathJob != null)
@@ -29,6 +27,7 @@ public class PathSeeker : MonoBehaviour
 
     private void Awake()
     {
+        Validate();
         _seeker = GetComponent<Seeker>();
         _delayBetweenPathUpdate = new WaitForSeconds(_secondsBetweenPathUpdate);
     }
@@ -59,20 +58,27 @@ public class PathSeeker : MonoBehaviour
     private void OnPathComplete(Path path)
     {
         if (path.error == false)
-        {
-            _path = path;
-            _currentWaypointIndex = uint.MinValue;
-            TargetPositionChanged?.Invoke(GetCurrentWaypoint());
-        }
+            ChangePath(path);
+    }
+
+    private void ChangePath(Path path)
+    {
+        _path = path;
+        _currentWaypointIndex = uint.MinValue;
+        NotifyOnTargetPositionChanged();
     }
 
     private void UpdateCurrentWaypoint()
     {
         if (GetDistanceToCurrentWaypoint() < _distanseBetweenWaypoints)
-        {
-            _currentWaypointIndex = (uint)Mathf.Clamp(++_currentWaypointIndex, uint.MinValue, _path.vectorPath.Count - 1);
-            TargetPositionChanged?.Invoke(GetCurrentWaypoint());
-        }
+            TransitToNextWaypoint();
+    }
+
+    private void TransitToNextWaypoint()
+    {
+        _currentWaypointIndex = (uint)Mathf.Clamp(++_currentWaypointIndex,
+            uint.MinValue, _path.vectorPath.Count - 1);
+        NotifyOnTargetPositionChanged();
     }
 
     private float GetDistanceToCurrentWaypoint()
@@ -80,6 +86,9 @@ public class PathSeeker : MonoBehaviour
 
     private Vector3 GetCurrentWaypoint()
         => _path.vectorPath[(int)_currentWaypointIndex];
+
+    private void NotifyOnTargetPositionChanged() 
+        => TargetPositionChanged?.Invoke(GetCurrentWaypoint());
 
     private void Validate()
     {

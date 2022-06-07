@@ -12,16 +12,17 @@ public class Mover : MonoBehaviour
     public Vector2 CurrentDirection 
         => (_targetPosition - transform.position).normalized;
 
-    private void OnEnable()
-    {
-        Validate();
-        _pathSeeker.TargetPositionChanged += OnTargetPositionChanged;
-    }
+    private void OnEnable() 
+        => _pathSeeker.TargetPositionChanged += OnTargetPositionChanged;
 
     private void OnDisable() 
         => _pathSeeker.TargetPositionChanged -= OnTargetPositionChanged;
 
-    private void Awake() => _pathSeeker = GetComponent<PathSeeker>();
+    private void Awake()
+    {
+        Validate();
+        _pathSeeker = GetComponent<PathSeeker>();
+    }
 
     public void Initialize(Transform target)
     {
@@ -38,7 +39,7 @@ public class Mover : MonoBehaviour
     }
 
     private void OnTargetPositionChanged(Vector3 targetPosition)
-        => _targetPosition = targetPosition;
+        => _targetPosition = targetPosition != null ? targetPosition : throw new InvalidOperationException();
 
     private void Validate()
     {

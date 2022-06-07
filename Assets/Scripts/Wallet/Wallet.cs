@@ -11,10 +11,11 @@ public abstract class Wallet : MonoBehaviour, ISceneLoadHandler<PlayerResult>
 
     public event UnityAction<uint> BalanceChanged;
 
-    private void OnEnable() => Validate();
-
-    protected virtual void Awake()
-        => NotifyOnBalanceChanged();
+    protected virtual void Awake() 
+    {
+        Validate();
+        NotifyOnBalanceChanged();
+    }
 
     public void Withdraw(uint price)
         => ChangeBalance(price, DecreaseBalance);
