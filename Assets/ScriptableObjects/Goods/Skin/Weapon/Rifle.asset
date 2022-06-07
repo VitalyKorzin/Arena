@@ -16,7 +16,7 @@ MonoBehaviour:
   _payment: {fileID: 11400000, guid: 41665122752d99f40a717f86f8ce439c, type: 2}
   _icon: {fileID: 21300000, guid: 19d94ee8d89de2049a5e219c91610698, type: 3}
   _label: Rifle
-  _price: 200
+  _price: 20
   _isBought: 0
   _isSelected: 0
   _Weapon: {fileID: 1213097944827816519, guid: 09dff49ea3032e843ae47c662e5fc4e3, type: 3}

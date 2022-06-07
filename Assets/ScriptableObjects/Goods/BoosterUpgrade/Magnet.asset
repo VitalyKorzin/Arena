@@ -16,7 +16,7 @@ MonoBehaviour:
   _payment: {fileID: 11400000, guid: 41665122752d99f40a717f86f8ce439c, type: 2}
   _icon: {fileID: 21300000, guid: 0b11a991229c0a64db713f0abe7b8aec, type: 3}
   _label: Magnet
-  _price: 250
+  _price: 10
   _booster: {fileID: 4683311866845833529, guid: 8dfa3bcd060d42046988a25170de3fb3,
     type: 3}
   _maximumLevel: 5

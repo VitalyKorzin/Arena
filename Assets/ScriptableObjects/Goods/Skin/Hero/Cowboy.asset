@@ -16,7 +16,7 @@ MonoBehaviour:
   _payment: {fileID: 11400000, guid: bffc6c69e46049f498de8fa999be5c76, type: 2}
   _icon: {fileID: 1048834347278751523, guid: b769e256f188d7543be2fb0dcf413e03, type: 3}
   _label: Cowboy
-  _price: 10
+  _price: 3
   _isBought: 0
   _isSelected: 0
   _hero: {fileID: 7868034310236163268, guid: de9b08428d6cef541b660c72ab241589, type: 3}

@@ -16,7 +16,7 @@ MonoBehaviour:
   _payment: {fileID: 11400000, guid: 41665122752d99f40a717f86f8ce439c, type: 2}
   _icon: {fileID: -8873460142350583148, guid: b769e256f188d7543be2fb0dcf413e03, type: 3}
   _label: Vampire
-  _price: 200
+  _price: 20
   _isBought: 0
   _isSelected: 0
   _hero: {fileID: 763609443689670404, guid: f868c5a850bf22847a421b10801a01a8, type: 3}
